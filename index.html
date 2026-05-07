@@ -1,319 +1,274 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Drevon Shaw — IT Support & Networking</title>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg: #13141f;
-      --surface: #1c1e2e;
-      --surface2: #252840;
-      --border: #ffffff18;
-      --border-hover: #4a7fff60;
-      --blue: #4a7fff;
-      --blue-glow: #4a7fff30;
-      --blue-dim: #4a7fff15;
-      --text: #eeeef5;
-      --text-secondary: #9898b0;
-      --muted: #6a6a85;
-      --mono: 'Space Mono', monospace;
-      --sans: 'DM Sans', sans-serif;
+      --bg: #f5f5f8;
+      --surface: #ffffff;
+      --surface-soft: #f0f2f6;
+      --border: #dde0e7;
+      --border-strong: #c2c7d5;
+      --accent: #2563eb;
+      --accent-soft: #e0ebff;
+      --accent-text: #1e3a8a;
+      --text: #111827;
+      --text-secondary: #4b5563;
+      --muted: #9ca3af;
+      --mono: "Space Mono", monospace;
+      --sans: "DM Sans", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
 
     body {
-      background: var(--bg);
-      color: var(--text);
       font-family: var(--sans);
       font-size: 16px;
       line-height: 1.7;
-      overflow-x: hidden;
+      color: var(--text);
+      background: var(--bg);
     }
 
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
-      background-size: 72px 72px;
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    body::after {
-      content: '';
-      position: fixed;
-      top: -300px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 700px;
-      height: 500px;
-      background: radial-gradient(ellipse, rgba(74,127,255,0.12) 0%, transparent 70%);
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    .container {
-      max-width: 880px;
+    .page {
+      max-width: 960px;
       margin: 0 auto;
-      padding: 0 28px;
-      position: relative;
-      z-index: 1;
+      padding: 0 20px 48px;
     }
 
     /* NAV */
     nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      backdrop-filter: blur(24px);
-      background: rgba(19, 20, 31, 0.85);
-      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(245, 245, 248, 0.96);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid #e5e7eb;
     }
 
-    nav .container {
+    .nav-inner {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 10px 20px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      height: 58px;
+      gap: 16px;
     }
 
     .nav-logo {
       font-family: var(--mono);
       font-size: 13px;
-      color: var(--blue);
-      letter-spacing: 0.06em;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent-text);
     }
 
     .nav-links {
       display: flex;
-      gap: 28px;
+      gap: 20px;
       list-style: none;
     }
 
     .nav-links a {
-      font-family: var(--mono);
-      font-size: 11px;
+      font-size: 13px;
       color: var(--text-secondary);
       text-decoration: none;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
-      transition: color 0.2s;
     }
 
-    .nav-links a:hover { color: var(--blue); }
+    .nav-links a:hover {
+      color: var(--accent);
+    }
 
     /* HERO */
     .hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      padding-top: 58px;
+      padding: 48px 0 40px;
+      border-bottom: 1px solid var(--border);
     }
 
-    .hero-content { padding: 80px 0; }
-
-    .status-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 7px 16px;
-      background: var(--blue-dim);
-      border: 1px solid rgba(74,127,255,0.25);
-      border-radius: 100px;
-      font-family: var(--mono);
-      font-size: 11px;
-      color: var(--blue);
-      letter-spacing: 0.06em;
-      margin-bottom: 30px;
-      opacity: 0;
-      animation: fadeUp 0.5s ease forwards;
-    }
-
-    .status-dot {
-      width: 6px; height: 6px;
-      background: var(--blue);
-      border-radius: 50%;
-      animation: pulse 2s ease infinite;
-    }
-
-    .hero-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
+    .hero-tagline {
       font-family: var(--mono);
       font-size: 12px;
-      color: var(--blue);
-      letter-spacing: 0.1em;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
-      margin-bottom: 20px;
-      opacity: 0;
-      animation: fadeUp 0.5s ease 0.08s forwards;
-    }
-
-    .hero-tag::before {
-      content: '';
-      display: block;
-      width: 28px; height: 1px;
-      background: var(--blue);
+      color: var(--accent-text);
+      margin-bottom: 12px;
     }
 
     .hero-name {
       font-family: var(--mono);
-      font-size: clamp(44px, 8vw, 74px);
-      font-weight: 700;
-      line-height: 1.05;
-      letter-spacing: -0.02em;
-      margin-bottom: 14px;
-      opacity: 0;
-      animation: fadeUp 0.5s ease 0.16s forwards;
+      font-size: clamp(32px, 5vw, 40px);
+      letter-spacing: -0.03em;
+      margin-bottom: 8px;
     }
 
-    .hero-name span { color: var(--blue); }
-
-    .hero-title {
-      font-size: 17px;
-      font-weight: 400;
+    .hero-role {
+      font-size: 18px;
+      font-weight: 500;
       color: var(--text-secondary);
+      margin-bottom: 14px;
+    }
+
+    .hero-meta {
+      font-size: 14px;
+      color: var(--muted);
       margin-bottom: 18px;
-      opacity: 0;
-      animation: fadeUp 0.5s ease 0.24s forwards;
     }
 
     .hero-bio {
-      font-size: 16px;
-      color: var(--text);
-      max-width: 520px;
-      margin-bottom: 40px;
-      opacity: 0;
-      animation: fadeUp 0.5s ease 0.32s forwards;
-      line-height: 1.8;
+      max-width: 620px;
+      font-size: 15px;
+      color: var(--text-secondary);
+      margin-bottom: 22px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--surface-soft);
+      font-size: 12px;
+      color: var(--accent-text);
+      margin-bottom: 18px;
+    }
+
+    .hero-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #16a34a;
     }
 
     .hero-actions {
       display: flex;
-      gap: 14px;
       flex-wrap: wrap;
-      opacity: 0;
-      animation: fadeUp 0.5s ease 0.4s forwards;
+      gap: 10px;
+      margin-top: 4px;
     }
 
     .btn {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      padding: 11px 22px;
-      border-radius: 6px;
-      font-family: var(--mono);
-      font-size: 12px;
-      letter-spacing: 0.05em;
+      justify-content: center;
+      gap: 6px;
+      padding: 9px 18px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 500;
+      border: 1px solid transparent;
       text-decoration: none;
-      transition: all 0.2s;
       cursor: pointer;
-      border: none;
+      transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease,
+                  transform 0.12s ease, box-shadow 0.12s ease;
     }
 
     .btn-primary {
-      background: var(--blue);
-      color: #fff;
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #ffffff;
+      box-shadow: 0 6px 18px rgba(37, 99, 235, 0.18);
     }
 
     .btn-primary:hover {
-      background: #6090ff;
-      box-shadow: 0 4px 20px var(--blue-glow);
+      background: #1d4ed8;
+      border-color: #1d4ed8;
       transform: translateY(-1px);
+      box-shadow: 0 8px 20px rgba(37, 99, 235, 0.24);
     }
 
-    .btn-secondary {
-      background: var(--surface);
+    .btn-ghost {
+      background: #ffffff;
+      border-color: var(--border);
       color: var(--text-secondary);
-      border: 1px solid var(--border);
     }
 
-    .btn-secondary:hover {
-      border-color: var(--blue);
-      color: var(--blue);
-      transform: translateY(-1px);
+    .btn-ghost:hover {
+      border-color: var(--accent);
+      color: var(--accent-text);
+      background: var(--surface-soft);
     }
 
     /* SECTIONS */
     section {
-      padding: 90px 0;
-      border-top: 1px solid var(--border);
+      padding: 40px 0;
+      border-bottom: 1px solid var(--border);
     }
 
     .section-label {
       font-family: var(--mono);
       font-size: 11px;
-      color: var(--blue);
-      letter-spacing: 0.15em;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
-      margin-bottom: 10px;
+      color: var(--muted);
+      margin-bottom: 6px;
     }
 
     .section-title {
       font-family: var(--mono);
-      font-size: 26px;
-      font-weight: 700;
-      margin-bottom: 44px;
+      font-size: 20px;
+      margin-bottom: 18px;
       color: var(--text);
     }
 
     /* ABOUT */
     .about-text {
+      max-width: 720px;
+      font-size: 15px;
       color: var(--text-secondary);
-      max-width: 640px;
     }
 
     /* SKILLS */
     .skills-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 14px;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+      margin-top: 10px;
     }
 
     .skill-card {
       background: var(--surface);
+      border-radius: 12px;
       border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 22px 24px;
-      transition: border-color 0.2s, transform 0.2s;
+      padding: 16px 18px;
     }
 
-    .skill-card:hover {
-      border-color: var(--border-hover);
-      transform: translateY(-2px);
-    }
-
-    .skill-card-title {
+    .skill-title {
       font-family: var(--mono);
-      font-size: 11px;
-      color: var(--blue);
-      letter-spacing: 0.1em;
+      font-size: 12px;
       text-transform: uppercase;
-      margin-bottom: 14px;
+      letter-spacing: 0.12em;
+      color: var(--accent-text);
+      margin-bottom: 10px;
     }
 
     .skill-tags {
       display: flex;
       flex-wrap: wrap;
-      gap: 7px;
+      gap: 6px;
     }
 
     .tag {
-      font-family: var(--mono);
-      font-size: 11px;
-      color: var(--text-secondary);
-      background: var(--surface2);
+      font-size: 12px;
+      padding: 4px 9px;
+      border-radius: 999px;
+      background: var(--surface-soft);
       border: 1px solid var(--border);
-      padding: 4px 10px;
-      border-radius: 4px;
+      color: var(--text-secondary);
     }
 
     /* CERTS */
@@ -321,119 +276,111 @@
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 14px;
+      margin-top: 10px;
     }
 
     .cert-card {
       background: var(--surface);
+      border-radius: 12px;
       border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 22px 24px;
-      transition: border-color 0.2s;
+      padding: 16px 18px;
     }
-
-    .cert-card:hover { border-color: var(--border-hover); }
 
     .cert-name {
       font-size: 14px;
       font-weight: 500;
-      color: var(--text);
-      margin-bottom: 8px;
-      line-height: 1.4;
+      margin-bottom: 4px;
     }
 
     .cert-status {
-      font-family: var(--mono);
-      font-size: 11px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
+      font-size: 12px;
+      color: var(--muted);
     }
 
-    .cert-status.done { color: #4ade80; }
-    .cert-status.progress { color: #fbbf24; }
+    .cert-status span {
+      font-family: var(--mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      padding: 2px 6px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      margin-right: 6px;
+    }
+
+    .cert-status--progress span {
+      border-color: #facc15;
+      color: #b45309;
+      background: #fef9c3;
+    }
+
+    .cert-status--done span {
+      border-color: #4ade80;
+      color: #166534;
+      background: #dcfce7;
+    }
 
     /* PROJECTS */
     .projects-list {
       display: flex;
       flex-direction: column;
       gap: 14px;
+      margin-top: 10px;
     }
 
     .project-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 26px 28px;
       display: grid;
-      grid-template-columns: 1fr auto;
+      grid-template-columns: minmax(0, 1fr) auto;
       gap: 16px;
-      align-items: start;
+      align-items: flex-start;
+      background: var(--surface);
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      padding: 18px 20px;
       text-decoration: none;
       color: inherit;
-      transition: border-color 0.2s, transform 0.2s;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .project-card::before {
-      content: '';
-      position: absolute;
-      left: 0; top: 0; bottom: 0;
-      width: 3px;
-      background: var(--blue);
-      opacity: 0;
-      transition: opacity 0.2s;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.12s ease;
     }
 
     .project-card:hover {
-      border-color: var(--border-hover);
-      transform: translateX(3px);
+      border-color: var(--border-strong);
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
+      transform: translateY(-1px);
     }
-
-    .project-card:hover::before { opacity: 1; }
 
     .project-name {
       font-size: 15px;
       font-weight: 600;
-      color: var(--text);
-      margin-bottom: 8px;
-      line-height: 1.4;
+      margin-bottom: 6px;
     }
 
     .project-desc {
       font-size: 14px;
       color: var(--text-secondary);
-      line-height: 1.65;
-      margin-bottom: 14px;
+      margin-bottom: 8px;
     }
 
     .project-tags {
       display: flex;
       flex-wrap: wrap;
-      gap: 7px;
+      gap: 6px;
     }
 
     .project-tag {
+      font-size: 11px;
       font-family: var(--mono);
-      font-size: 10px;
-      color: var(--blue);
-      background: var(--blue-dim);
-      border: 1px solid rgba(74,127,255,0.2);
-      padding: 3px 9px;
-      border-radius: 4px;
-      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 3px 7px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent-text);
     }
 
     .project-arrow {
       font-size: 18px;
       color: var(--muted);
-      transition: color 0.2s, transform 0.2s;
       margin-top: 2px;
-    }
-
-    .project-card:hover .project-arrow {
-      color: var(--blue);
-      transform: translate(2px, -2px);
     }
 
     /* WRITING */
@@ -441,393 +388,381 @@
       display: flex;
       flex-direction: column;
       gap: 10px;
+      margin-top: 10px;
     }
 
     .writing-item {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 18px 22px;
+      gap: 12px;
       background: var(--surface);
+      border-radius: 12px;
       border: 1px solid var(--border);
-      border-radius: 10px;
+      padding: 14px 16px;
       text-decoration: none;
       color: inherit;
-      transition: border-color 0.2s, transform 0.2s;
-      gap: 16px;
+      transition: border-color 0.15s ease, background 0.15s ease;
     }
 
     .writing-item:hover {
-      border-color: var(--border-hover);
-      transform: translateX(3px);
+      border-color: var(--border-strong);
+      background: #f9fafb;
     }
 
     .writing-title {
       font-size: 14px;
       font-weight: 500;
-      color: var(--text);
-      line-height: 1.4;
+      margin-bottom: 3px;
     }
 
     .writing-topic {
-      font-family: var(--mono);
-      font-size: 11px;
+      font-size: 12px;
       color: var(--muted);
-      margin-top: 5px;
     }
 
     .writing-arrow {
-      color: var(--muted);
       font-size: 16px;
-      flex-shrink: 0;
-      transition: color 0.2s;
+      color: var(--muted);
     }
 
-    .writing-item:hover .writing-arrow { color: var(--blue); }
-
-    /* CONNECT */
-    .connect-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 12px;
-    }
-
-    .connect-link {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 18px 20px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      text-decoration: none;
+    /* CONTACT */
+    .contact-text {
+      font-size: 15px;
       color: var(--text-secondary);
-      font-family: var(--mono);
-      font-size: 13px;
-      transition: all 0.2s;
+      margin-bottom: 12px;
     }
 
-    .connect-link:hover {
-      border-color: var(--border-hover);
-      color: var(--blue);
-      transform: translateY(-2px);
-    }
-
-    .connect-icon {
-      width: 32px; height: 32px;
-      background: var(--surface2);
-      border-radius: 6px;
+    .contact-list {
       display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 4px;
+    }
+
+    .contact-pill {
+      display: inline-flex;
       align-items: center;
-      justify-content: center;
+      gap: 6px;
+      padding: 6px 11px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--surface);
       font-size: 13px;
-      color: var(--blue);
-      flex-shrink: 0;
+      color: var(--text-secondary);
+      text-decoration: none;
+    }
+
+    .contact-pill span {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--accent-text);
+    }
+
+    .contact-pill:hover {
+      border-color: var(--accent);
+      color: var(--accent-text);
+      background: var(--surface-soft);
     }
 
     /* FOOTER */
     footer {
+      padding-top: 16px;
+      font-size: 12px;
+      color: var(--muted);
+      text-align: left;
       border-top: 1px solid var(--border);
-      padding: 36px 0;
-      text-align: center;
+      margin-top: 24px;
     }
 
-    footer p {
+    footer span {
       font-family: var(--mono);
       font-size: 11px;
-      color: var(--muted);
-      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--accent-text);
     }
 
-    footer span { color: var(--blue); }
-
-    /* ANIMATIONS */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(16px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(74,127,255,0.4); }
-      50% { opacity: 0.7; box-shadow: 0 0 0 4px rgba(74,127,255,0); }
-    }
-
-    ::-webkit-scrollbar { width: 4px; }
-    ::-webkit-scrollbar-track { background: var(--bg); }
-    ::-webkit-scrollbar-thumb { background: var(--blue); border-radius: 2px; }
-
-    @media (max-width: 600px) {
-      .nav-links { display: none; }
-      .project-card { grid-template-columns: 1fr; }
-      .hero-actions { flex-direction: column; }
-      .btn { justify-content: center; }
+    @media (max-width: 640px) {
+      .nav-links {
+        display: none;
+      }
+      .hero {
+        padding-top: 32px;
+      }
+      .project-card {
+        grid-template-columns: minmax(0, 1fr);
+      }
     }
   </style>
 </head>
 <body>
+  <nav>
+    <div class="nav-inner">
+      <div class="nav-logo">DREVON SHAW</div>
+      <ul class="nav-links">
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#writing">Writing</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
 
-<nav>
-  <div class="container">
-    <div class="nav-logo">DS_</div>
-    <ul class="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#writing">Writing</a></li>
-      <li><a href="#connect">Connect</a></li>
-    </ul>
-  </div>
-</nav>
-
-<div class="container">
-
-  <!-- HERO -->
-  <section class="hero" id="home">
-    <div class="hero-content">
-      <div class="status-badge">
-        <div class="status-dot"></div>
-        Open to IT Support & Help Desk roles — GTA
+  <main class="page">
+    <!-- HERO -->
+    <header class="hero">
+      <div class="hero-badge">
+        <div class="hero-dot"></div>
+        Open to IT Support & Help Desk roles · GTA
       </div>
-      <div class="hero-tag">IT Support & Networking</div>
-      <h1 class="hero-name">Drevon<br><span>Shaw</span></h1>
-      <p class="hero-title">Windows Support · Active Directory · Networking Fundamentals</p>
+      <div class="hero-tagline">IT Support · Networking · Security</div>
+      <h1 class="hero-name">Drevon Shaw</h1>
+      <p class="hero-role">Entry-level IT Support & Networking — building through home labs and automation.</p>
+      <p class="hero-meta">Toronto / Greater Toronto Area · Windows · Active Directory · PowerShell</p>
       <p class="hero-bio">
-        Early-career IT professional building real skills through home labs, automation, and documentation.
-        Focused on IT support today, with a long-term path into network security and cloud networking. Based in the Greater Toronto Area.
+        I’m an early-career IT professional focused on Windows support, Active Directory, and networking fundamentals.
+        I learn by building labs, automating repetitive tasks, and documenting everything so it’s repeatable.
+        My long-term path is toward network security and cloud networking roles.
       </p>
       <div class="hero-actions">
-        <a href="https://github.com/Drevon-Shaw" target="_blank" class="btn btn-primary">View GitHub →</a>
-        <a href="https://medium.com/@shawdrevon" target="_blank" class="btn btn-secondary">Read My Writing</a>
-        <a href="https://www.linkedin.com/in/drevon-s-212b78219/" target="_blank" class="btn btn-secondary">LinkedIn</a>
+        <a href="https://github.com/Drevon-Shaw" target="_blank" class="btn btn-primary">View GitHub</a>
+        <a href="https://medium.com/@shawdrevon" target="_blank" class="btn btn-ghost">Read my writing</a>
+        <a href="https://www.linkedin.com/in/drevon-s-212b78219/" target="_blank" class="btn btn-ghost">LinkedIn</a>
       </div>
-    </div>
-  </section>
+    </header>
 
-  <!-- ABOUT -->
-  <section id="about">
-    <div class="section-label">About</div>
-    <h2 class="section-title">Who I Am</h2>
-    <p class="about-text">
-      I’m building my IT career by doing the work hands-on: home labs, GitHub projects, and writing about what I learn.
-      Right now I’m focused on IT support and Active Directory, with a roadmap into network security and cloud networking.
-      I like turning what I study into repeatable checklists, scripts, and troubleshooting runbooks that mirror real service desk and junior network roles.
-    </p>
-  </section>
+    <!-- ABOUT -->
+    <section id="about">
+      <div class="section-label">About</div>
+      <h2 class="section-title">Who I am</h2>
+      <p class="about-text">
+        I’m breaking into IT support by building the same kinds of environments and workflows I’d see on the job:
+        on-prem Active Directory, user and group management, Group Policy, Microsoft 365, and PowerShell automation.
+        I treat each lab like a small project — with a clear goal, steps, troubleshooting notes, and takeaways — so
+        I can talk about what I’ve done in practical terms, not just theory.
+      </p>
+    </section>
 
-  <!-- SKILLS -->
-  <section id="skills">
-    <div class="section-label">What I Know</div>
-    <h2 class="section-title">Technical Skills</h2>
-    <div class="skills-grid">
+    <!-- PROJECTS -->
+    <section id="projects">
+      <div class="section-label">Work</div>
+      <h2 class="section-title">Selected lab projects</h2>
 
-      <div class="skill-card">
-        <div class="skill-card-title">Identity & Access</div>
-        <div class="skill-tags">
-          <span class="tag">Active Directory</span>
-          <span class="tag">Group Policy</span>
-          <span class="tag">User & Group Management</span>
-          <span class="tag">Account Lockouts</span>
-          <span class="tag">Password Resets</span>
-        </div>
-      </div>
-
-      <div class="skill-card">
-        <div class="skill-card-title">Systems & Infrastructure</div>
-        <div class="skill-tags">
-          <span class="tag">Windows 10 / 11</span>
-          <span class="tag">Windows Server</span>
-          <span class="tag">Basic Networking</span>
-          <span class="tag">DNS / DHCP</span>
-          <span class="tag">TCP/IP</span>
-          <span class="tag">RDP / VPN</span>
-          <span class="tag">Virtualization / Home Lab</span>
-        </div>
-      </div>
-
-      <div class="skill-card">
-        <div class="skill-card-title">Support & Operations</div>
-        <div class="skill-tags">
-          <span class="tag">Service Desk Workflows</span>
-          <span class="tag">Ticketing / ITSM</span>
-          <span class="tag">Troubleshooting</span>
-          <span class="tag">Onboarding & Offboarding</span>
-          <span class="tag">Documentation</span>
-        </div>
-      </div>
-
-      <div class="skill-card">
-        <div class="skill-card-title">Cloud & Productivity</div>
-        <div class="skill-tags">
-          <span class="tag">Microsoft 365</span>
-          <span class="tag">Outlook & Teams</span>
-          <span class="tag">Basic Entra ID</span>
-          <span class="tag">Licensing Basics</span>
-        </div>
-      </div>
-
-      <div class="skill-card">
-        <div class="skill-card-title">Scripting & Tools</div>
-        <div class="skill-tags">
-          <span class="tag">PowerShell</span>
-          <span class="tag">Git & GitHub</span>
-        </div>
-      </div>
-
-      <div class="skill-card">
-        <div class="skill-card-title">Currently Building</div>
-        <div class="skill-tags">
-          <span class="tag">Security+</span>
-          <span class="tag">Network Fundamentals</span>
-          <span class="tag">Monitoring & Logging</span>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- CERTIFICATIONS -->
-  <section id="certs">
-    <div class="section-label">Credentials</div>
-    <h2 class="section-title">Certifications</h2>
-    <div class="certs-grid">
-      <div class="cert-card">
-        <div class="cert-name">CompTIA Security+</div>
-        <div class="cert-status progress">⏳ In progress (target 2026)</div>
-      </div>
-      <div class="cert-card">
-        <div class="cert-name">TCM Security: Practical Help Desk</div>
-        <div class="cert-status done">✓ Completed</div>
-      </div>
-      <div class="cert-card">
-        <div class="cert-name">TCM Security: Linux Fundamentals</div>
-        <div class="cert-status done">✓ Completed</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PROJECTS -->
-  <section id="projects">
-    <div class="section-label">What I've Built</div>
-    <h2 class="section-title">Lab Projects</h2>
-    <div class="projects-list">
-
-      <a href="https://github.com/Drevon-Shaw/Active-Directory-Support-Lab-Windows-AD-Hands-On-" target="_blank" class="project-card">
-        <div>
-          <div class="project-name">Active Directory Support Lab – Windows Server 2022</div>
-          <div class="project-desc">
-            Hands-on lab that simulates a small business environment using Windows Server 2022 and Windows 10.
-            Used to practice real-world IT support and Active Directory administration: domain controller setup,
-            OU and group design, Group Policy configuration, and common help desk scenarios like account lockouts and access issues.
+      <div class="projects-list">
+        <a href="https://github.com/Drevon-Shaw/Active-Directory-Support-Lab-Windows-AD-Hands-On-" target="_blank" class="project-card">
+          <div>
+            <div class="project-name">Active Directory Support Lab — Windows Server 2022</div>
+            <p class="project-desc">
+              A hands-on lab that simulates a small business environment using Windows Server 2022 and Windows 10.
+              I use it to practice real-world IT support tasks: promoting a domain controller, designing OUs and groups,
+              configuring Group Policy, joining clients to the domain, and handling account lockouts and access issues.
+            </p>
+            <div class="project-tags">
+              <span class="project-tag">Active Directory</span>
+              <span class="project-tag">Windows Server</span>
+              <span class="project-tag">Group Policy</span>
+              <span class="project-tag">Help Desk</span>
+            </div>
           </div>
-          <div class="project-tags">
-            <span class="project-tag">Active Directory</span>
-            <span class="project-tag">Windows Server</span>
-            <span class="project-tag">Group Policy</span>
-            <span class="project-tag">Help Desk</span>
+          <div class="project-arrow">↗</div>
+        </a>
+
+        <a href="https://github.com/Drevon-Shaw/AD-PowerShell-Automation" target="_blank" class="project-card">
+          <div>
+            <div class="project-name">Active Directory PowerShell Automation Toolkit</div>
+            <p class="project-desc">
+              A small collection of PowerShell scripts that automate common AD admin tasks: bulk user creation from CSV,
+              group membership updates, and account status checks. I built it to mirror how a service desk or junior
+              sysadmin team would handle onboarding, offboarding, and routine maintenance at scale.
+            </p>
+            <div class="project-tags">
+              <span class="project-tag">PowerShell</span>
+              <span class="project-tag">Automation</span>
+              <span class="project-tag">Active Directory</span>
+            </div>
+          </div>
+          <div class="project-arrow">↗</div>
+        </a>
+
+        <a href="https://github.com/Drevon-Shaw/Basic-Pentesting-Lab" target="_blank" class="project-card">
+          <div>
+            <div class="project-name">Basic Pentesting & Security Lab</div>
+            <p class="project-desc">
+              An introductory security lab focused on understanding attacker workflows so I can better defend systems
+              as I move deeper into networking and security. Covers reconnaissance, basic exploitation, and documenting
+              remediation ideas so I can connect offensive techniques back to defensive IT work.
+            </p>
+            <div class="project-tags">
+              <span class="project-tag">Security Lab</span>
+              <span class="project-tag">Kali Linux</span>
+              <span class="project-tag">Pentesting Basics</span>
+            </div>
+          </div>
+          <div class="project-arrow">↗</div>
+        </a>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills">
+      <div class="section-label">Skills</div>
+      <h2 class="section-title">Where I add value</h2>
+
+      <div class="skills-grid">
+        <div class="skill-card">
+          <div class="skill-title">Identity & access</div>
+          <div class="skill-tags">
+            <span class="tag">Active Directory</span>
+            <span class="tag">OUs & groups</span>
+            <span class="tag">Account lockouts</span>
+            <span class="tag">Password resets</span>
+            <span class="tag">Group Policy basics</span>
           </div>
         </div>
-        <div class="project-arrow">↗</div>
-      </a>
 
-      <a href="https://github.com/Drevon-Shaw/AD-PowerShell-Automation" target="_blank" class="project-card">
-        <div>
-          <div class="project-name">Active Directory PowerShell Automation</div>
-          <div class="project-desc">
-            Toolkit of PowerShell scripts that automate common AD admin tasks: bulk user creation from CSV,
-            group membership management, and account status checks. Designed to mirror how service desk and junior
-            sysadmin teams handle onboarding, offboarding, and routine maintenance at scale.
-          </div>
-          <div class="project-tags">
-            <span class="project-tag">PowerShell</span>
-            <span class="project-tag">Automation</span>
-            <span class="project-tag">Active Directory</span>
+        <div class="skill-card">
+          <div class="skill-title">Systems & networking</div>
+          <div class="skill-tags">
+            <span class="tag">Windows 10 / 11</span>
+            <span class="tag">Windows Server</span>
+            <span class="tag">DNS / DHCP</span>
+            <span class="tag">TCP/IP</span>
+            <span class="tag">Remote access</span>
+            <span class="tag">Home lab / VMs</span>
           </div>
         </div>
-        <div class="project-arrow">↗</div>
-      </a>
 
-      <a href="https://github.com/Drevon-Shaw/Basic-Pentesting-Lab" target="_blank" class="project-card">
-        <div>
-          <div class="project-name">Basic Pentesting & Security Lab</div>
-          <div class="project-desc">
-            Introductory security lab used to understand attacker workflows so I can better defend systems as I move
-            deeper into networking and security. Includes reconnaissance, basic exploitation, and documenting remediation
-            ideas to connect offensive techniques back to defensive IT work.
-          </div>
-          <div class="project-tags">
-            <span class="project-tag">Security Lab</span>
-            <span class="project-tag">Kali Linux</span>
-            <span class="project-tag">Pentesting Basics</span>
+        <div class="skill-card">
+          <div class="skill-title">Support & operations</div>
+          <div class="skill-tags">
+            <span class="tag">Service desk mindset</span>
+            <span class="tag">Ticketing & triage</span>
+            <span class="tag">User onboarding</span>
+            <span class="tag">Issue documentation</span>
           </div>
         </div>
-        <div class="project-arrow">↗</div>
-      </a>
 
-    </div>
-  </section>
-
-  <!-- WRITING -->
-  <section id="writing">
-    <div class="section-label">Technical Writing</div>
-    <h2 class="section-title">Writing & Lab Notes</h2>
-    <div class="writing-list">
-
-      <a href="https://medium.com/@shawdrevon" target="_blank" class="writing-item">
-        <div>
-          <div class="writing-title">Active Directory Support Lab – Why I Built It</div>
-          <div class="writing-topic">IT Support · Active Directory · Lab Documentation</div>
+        <div class="skill-card">
+          <div class="skill-title">Cloud & productivity</div>
+          <div class="skill-tags">
+            <span class="tag">Microsoft 365</span>
+            <span class="tag">Outlook & Teams</span>
+            <span class="tag">Basic Entra ID</span>
+          </div>
         </div>
-        <div class="writing-arrow">↗</div>
-      </a>
 
-      <a href="https://medium.com/@shawdrevon" target="_blank" class="writing-item">
-        <div>
-          <div class="writing-title">Automating Daily AD Tasks with PowerShell</div>
-          <div class="writing-topic">PowerShell · Bulk Operations · Help Desk Workflows</div>
+        <div class="skill-card">
+          <div class="skill-title">Scripting & tooling</div>
+          <div class="skill-tags">
+            <span class="tag">PowerShell</span>
+            <span class="tag">Git & GitHub</span>
+          </div>
         </div>
-        <div class="writing-arrow">↗</div>
-      </a>
 
-      <a href="https://medium.com/@shawdrevon" target="_blank" class="writing-item">
-        <div>
-          <div class="writing-title">From Support to Security – Using Labs to Build a Career</div>
-          <div class="writing-topic">Career Growth · Networking & Security · Hands-on Learning</div>
+        <div class="skill-card">
+          <div class="skill-title">In progress</div>
+          <div class="skill-tags">
+            <span class="tag">Security+</span>
+            <span class="tag">Network fundamentals</span>
+            <span class="tag">Monitoring & logging</span>
+          </div>
         </div>
-        <div class="writing-arrow">↗</div>
-      </a>
+      </div>
+    </section>
 
-    </div>
-  </section>
+    <!-- CERTIFICATIONS -->
+    <section id="certs">
+      <div class="section-label">Credentials</div>
+      <h2 class="section-title">Certifications</h2>
 
-  <!-- CONNECT -->
-  <section id="connect">
-    <div class="section-label">Get In Touch</div>
-    <h2 class="section-title">Connect</h2>
-    <div class="connect-grid">
-      <a href="https://www.linkedin.com/in/drevon-s-212b78219/" target="_blank" class="connect-link">
-        <div class="connect-icon">in</div>
-        LinkedIn
-      </a>
-      <a href="https://github.com/Drevon-Shaw" target="_blank" class="connect-link">
-        <div class="connect-icon">gh</div>
-        GitHub
-      </a>
-      <a href="https://medium.com/@shawdrevon" target="_blank" class="connect-link">
-        <div class="connect-icon">m</div>
-        Medium
-      </a>
-      <a href="mailto:shawdrevon@gmail.com" class="connect-link">
-        <div class="connect-icon">@</div>
-        Email
-      </a>
-    </div>
-  </section>
+      <div class="certs-grid">
+        <div class="cert-card">
+          <div class="cert-name">CompTIA Security+</div>
+          <div class="cert-status cert-status--progress">
+            <span>In progress</span> Target exam date: 2026
+          </div>
+        </div>
+        <div class="cert-card">
+          <div class="cert-name">TCM Security — Practical Help Desk</div>
+          <div class="cert-status cert-status--done">
+            <span>Completed</span> Hands-on help desk fundamentals
+          </div>
+        </div>
+        <div class="cert-card">
+          <div class="cert-name">TCM Security — Linux Fundamentals</div>
+          <div class="cert-status cert-status--done">
+            <span>Completed</span> Basic Linux and CLI skills
+          </div>
+        </div>
+      </div>
+    </section>
 
-</div>
+    <!-- WRITING -->
+    <section id="writing">
+      <div class="section-label">Writing</div>
+      <h2 class="section-title">Writing & lab notes</h2>
 
-<footer>
-  <p>Drevon Shaw — Toronto, ON &nbsp;·&nbsp; <span>Consistency builds competence</span></p>
-</footer>
+      <p class="about-text" style="margin-bottom: 12px;">
+        I use short writeups to reinforce what I learn and show how I think through problems.
+        Most of my posts live on Medium — here are typical topics I cover:
+      </p>
 
+      <div class="writing-list">
+        <a href="https://medium.com/@shawdrevon" target="_blank" class="writing-item">
+          <div>
+            <div class="writing-title">Active Directory Support Lab — Why I Built It</div>
+            <div class="writing-topic">IT support · AD DS · building a home lab to mirror real environments</div>
+          </div>
+          <div class="writing-arrow">↗</div>
+        </a>
+
+        <a href="https://medium.com/@shawdrevon" target="_blank" class="writing-item">
+          <div>
+            <div class="writing-title">Automating Daily AD Tasks with PowerShell</div>
+            <div class="writing-topic">PowerShell · bulk user operations · reducing repetitive work</div>
+          </div>
+          <div class="writing-arrow">↗</div>
+        </a>
+
+        <a href="https://medium.com/@shawdrevon" target="_blank" class="writing-item">
+          <div>
+            <div class="writing-title">From Help Desk Labs to Network Security</div>
+            <div class="writing-topic">career path · building fundamentals for networking & security</div>
+          </div>
+          <div class="writing-arrow">↗</div>
+        </a>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="section-label">Contact</div>
+      <h2 class="section-title">Let’s connect</h2>
+      <p class="contact-text">
+        I’m based in Mississauga / Greater Toronto Area and I’m actively looking for entry-level IT Support / Help Desk,
+        junior systems support, or networking-focused roles where I can keep building on this foundation.
+      </p>
+
+      <div class="contact-list">
+        <a href="mailto:shawdrevon@gmail.com" class="contact-pill">
+          <span>@</span> shawdrevon@gmail.com
+        </a>
+        <a href="https://www.linkedin.com/in/drevon-s-212b78219/" target="_blank" class="contact-pill">
+          <span>in</span> LinkedIn
+        </a>
+        <a href="https://github.com/Drevon-Shaw" target="_blank" class="contact-pill">
+          <span>gh</span> GitHub
+        </a>
+        <a href="https://medium.com/@shawdrevon" target="_blank" class="contact-pill">
+          <span>md</span> Medium
+        </a>
+      </div>
+    </section>
+
+    <footer>
+      <p>Drevon Shaw · Toronto / GTA<br /><span>Consistency builds competence</span></p>
+    </footer>
+  </main>
 </body>
 </html>
